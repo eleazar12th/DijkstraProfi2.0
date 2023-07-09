@@ -1,6 +1,7 @@
 {
   "name": "react-app",
   "version": "0.1.0",
+  "homepage": "https://eleazar12th.github.io/DijkstraProfi2.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
