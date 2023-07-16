@@ -69,16 +69,18 @@ export default function MainPage(props) {
 
     function handleStartChange(evt) {
         setPaused(true);
-        if (!evt.target.value.trim().length || !Number.isInteger(+evt.target.value)) {
+
+        let val = evt.target.value;
+        if (!val.trim().length || !Number.isInteger(+val)) {
             setErrorMessage("Ошибка: номер вершины может быть только целым числом");
             return;
-        } else if (evt.target.value < 1 || evt.target.value > defaultVal.N) {
+        } else if (val < 1 || val > defaultVal.N) {
             setErrorMessage("Ошибка: вершина с таким номером не найдена");
             return;
         }
 
         setErrorMessage("");
-        setStart(+evt.target.value);
+        setStart(+val);
         setIndex(0);
     }
 
