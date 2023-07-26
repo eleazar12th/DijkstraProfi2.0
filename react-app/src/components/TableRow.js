@@ -11,7 +11,8 @@ export default function TableRow(props) {
                         key={newKey}
                         rowNumber={props.rowNumber}
                         colNumber={colNumber}
-                        setCells={props.setCells}
+                        setCell={props.setCell}
+                        setMatrixErrorCount={props.setMatrixErrorCount}
                     />
                 );
             })}

@@ -1,59 +1,36 @@
-import { useState, useEffect } from "react";
 import TableRow from "./TableRow";
 import "../css/table.css";
 
 export default function Table(props) {
-    const [matrix, setMatrix] = useState([]);
-
-    useEffect(() => {
-        setMatrix(
-            Array(props.nodesAmount).fill(
-                Array(props.nodesAmount).fill("-")
-            )
-        );
-    }, [props.nodesAmount]);
-
-    function setRow(rowNumber, newRow) {
-        let updatedMatrix = matrix.map((oldRow, i) => {
-            if (i === rowNumber) {
-                return newRow;
-            }
-
-            return oldRow;
-        });
-
-        setMatrix(updatedMatrix);
+    function deepCopy(arr) {
+        let arrCopy = [];
+        for (let i = 0; i < arr.length; ++i) {
+            arrCopy.push([...arr[i]]);
+        }
+        return arrCopy;
     }
 
     function setCell(rowNumber, colNumber, newVal) {
-        let updatedRow = matrix[rowNumber].map((oldVal, i) => {
-            if (i === colNumber) {
-                return newVal;
-            }
+        let updatedMatrix = deepCopy(props.matrix);
+        updatedMatrix[rowNumber][colNumber] = newVal;
 
-            return oldVal;
-        });
-
-        setRow(rowNumber, updatedRow);
-    }
-
-    function setCells(rowNumber, colNumber, newVal) {
-        setCell(rowNumber, colNumber, newVal);
-
-        if (props.mode === "normal") {
-            setCell(colNumber, rowNumber, newVal);
+        if (props.graphType === "undirected" && rowNumber !== colNumber) {
+            updatedMatrix[colNumber][rowNumber] = newVal;
 
             const reversedCellId = `cell_${colNumber}:${rowNumber}`;
             let reversedCell = document.getElementById(reversedCellId);
             reversedCell.value = newVal;
         }
+
+        props.setMatrix(updatedMatrix);
     }
 
     return (<div>
+        <h3>Fill in the adjacency matrix</h3>
         <table border="1">
             <tbody>
             <tr>
-                <th></th>
+                <th>from\to</th>
                 {Array(props.nodesAmount)
                     .fill(true)
                     .map((item, index) => {
@@ -65,13 +42,14 @@ export default function Table(props) {
             </tr>
 
             {
-                matrix.map((row, rowNumber) => {
+                props.matrix.map((row, rowNumber) => {
                     return (
                         <TableRow
                             key={`row${rowNumber}`}
                             row={row}
                             rowNumber={rowNumber}
-                            setCells={setCells}
+                            setCell={setCell}
+                            setMatrixErrorCount={props.setMatrixErrorCount}
                         />
                     );
                 })

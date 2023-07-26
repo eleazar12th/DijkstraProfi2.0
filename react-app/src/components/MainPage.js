@@ -1,5 +1,6 @@
-import { useEffect, useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import {useEffect, useState, useMemo} from "react";
+import {Link, useLocation} from "react-router-dom";
+import StartInput from "./StartInput";
 import GraphConstructor from "./GraphConstructor";
 import Dijkstra from "../dijkstra";
 import * as defaultVal from "../values/default-values";
@@ -10,9 +11,21 @@ export default function MainPage(props) {
     const [paused, setPaused] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
 
+    const locationState = useLocation().state;
+    const graphData = useMemo(
+        () => {
+            if (locationState) {
+                return locationState.graphData;
+            }
+
+            return defaultVal.DIRECTED_GRAPH_DATA;
+        },
+        [locationState]
+    )
+
     const graphStates = useMemo(
-        () => Dijkstra(defaultVal.N, defaultVal.EDGES, start),
-        [start]
+        () => Dijkstra(graphData, start),
+        [graphData, start]
     );
     const maxIndex = graphStates.length - 1;
 
@@ -74,7 +87,7 @@ export default function MainPage(props) {
         if (!val.trim().length || !Number.isInteger(+val)) {
             setErrorMessage("Ошибка: номер вершины может быть только целым числом");
             return;
-        } else if (val < 1 || val > defaultVal.N) {
+        } else if (val < 1 || val > graphData.nodesAmount) {
             setErrorMessage("Ошибка: вершина с таким номером не найдена");
             return;
         }
@@ -86,11 +99,7 @@ export default function MainPage(props) {
 
     return (<div>
         <h1>Dijkstra visualisation</h1>
-
-        <label htmlFor="start-input">Start node: </label>
-        <input type="text" defaultValue="1" id="start-input"
-               onBlur={handleStartChange}></input>
-        <br />
+        <StartInput handleOnBlur={handleStartChange}/>
 
         {errorMessage ? <h4 style={{color: "red"}}>{errorMessage}</h4> : <br/>}
 
@@ -105,6 +114,6 @@ export default function MainPage(props) {
             <button type="button" style={{marginLeft: "80px"}}>Another graph</button>
         </Link>
 
-        <GraphConstructor edgesMap={defaultVal.EDGES} graphState={graphStates[index]}/>
+        <GraphConstructor graphData={graphData} graphState={graphStates[index]}/>
     </div>);
 }

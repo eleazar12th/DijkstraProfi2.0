@@ -10,7 +10,10 @@ function findEdgesAmount(n, edges) {
     return edgesCount;
 }
 
-export default function Dijkstra(n, edges, start) {
+export default function Dijkstra(graphData, start) {
+    const n = graphData.nodesAmount;
+    const edges = graphData.edges;
+
     let states = [];
     let dist = Array(n + 1).fill(cst.INF);
     let nodeColors = Array(n + 1).fill(cst.WHITE);
@@ -28,7 +31,7 @@ export default function Dijkstra(n, edges, start) {
 
     function turnEdgesRed(v) {
         for (let e of edges[v]) {
-            if (nodeColors[e.to] !== cst.GREEN) {
+            if (e.to !== v && nodeColors[e.to] !== cst.GREEN) {
                 redFlag = true;
                 edgeColors[e.id] = cst.RED;
             }
@@ -65,7 +68,7 @@ export default function Dijkstra(n, edges, start) {
             pushState(cst.TURN_EDGES_RED_TEXT);
 
         for (let e of edges[v]) {
-            if (nodeColors[e.to] !== cst.GREEN) {
+            if (e.to !== v && nodeColors[e.to] !== cst.GREEN) {
                 nodeColors[e.to] = cst.VIOLET;
 
                 if (dist[v] + e.length < dist[e.to]) {

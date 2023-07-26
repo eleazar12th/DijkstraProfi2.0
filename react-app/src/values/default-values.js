@@ -1,4 +1,25 @@
 import Edge from "../structures/edge";
+import GraphData from "../structures/graph-data";
+
+const directedGraphMatrix = [
+    ["-", 7, 9, "-", "-", 14],
+    ["-", "-", 10, 15, "-", "-"],
+    ["-", "-", "-", 11, "-", 2],
+    ["-", "-", "-", "-", 6, "-"],
+    ["-", "-", "-", "-", "-", 9],
+    ["-", "-", "-", "-", "-", "-"]
+];
+export const DIRECTED_GRAPH_DATA = new GraphData(directedGraphMatrix, "directed");
+
+const undirectedGraphMatrix = [
+    ["-", 7, 9, "-", "-", 14],
+    [7, "-", 10, 15, "-", "-"],
+    [9, 10, "-", 11, "-", 2],
+    ["-", 15, 11, "-", 6, "-"],
+    ["-", "-", "-", 6, "-", 9],
+    [14, "-", 2, "-", 9, "-"]
+];
+export const UNDIRECTED_GRAPH_DATA = new GraphData(undirectedGraphMatrix, "undirected");
 
 export const EDGES = {
     1: [

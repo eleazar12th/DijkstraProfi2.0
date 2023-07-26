@@ -2,9 +2,20 @@ import { useMemo } from "react";
 import Graph from "react-graph-vis";
 import { INF } from "../values/constants";
 
+function hideArrow(edge) {
+    edge.arrows = {
+        to: {
+            enabled: false
+        }
+    }
+}
+
 export default function GraphConstructor(props) {
-    function createGraphNodesEdges(graphState, edgesMap) {
-        const nodesNumber = graphState.currDist.length - 1;
+    function createGraphNodesEdges(graphData, graphState) {
+        const graphType = graphData.graphType;
+        const nodesNumber = graphData.nodesAmount;
+        const edgesMap = graphData.edges;
+
         let nodes = [];
         for (let v = 1; v <= nodesNumber; ++v) {
             let nodeDist = graphState.currDist[v];
@@ -30,6 +41,14 @@ export default function GraphConstructor(props) {
                     label: edge.length.toString(),
                     color: graphState.edgeColors[edge.id]
                 };
+
+                if (graphType === "undirected") {
+                    if (newEdge.to < v)
+                        continue;
+
+                    hideArrow(newEdge);
+                }
+
                 edges.push(newEdge);
             }
         }
@@ -41,8 +60,8 @@ export default function GraphConstructor(props) {
     }
 
     const graph = useMemo(
-        () => createGraphNodesEdges(props.graphState, props.edgesMap),
-        [props.graphState, props.edgesMap]
+        () => createGraphNodesEdges(props.graphData, props.graphState),
+        [props.graphData, props.graphState]
     );
 
     const options = {
