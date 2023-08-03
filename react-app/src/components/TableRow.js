@@ -12,7 +12,8 @@ export default function TableRow(props) {
                         rowNumber={props.rowNumber}
                         colNumber={colNumber}
                         setCell={props.setCell}
-                        setMatrixErrorCount={props.setMatrixErrorCount}
+                        cleanCell={props.cleanCell}
+                        setCellError={props.setCellError}
                     />
                 );
             })}

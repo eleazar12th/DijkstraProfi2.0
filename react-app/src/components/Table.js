@@ -1,7 +1,18 @@
+import { useState, useEffect } from "react";
 import TableRow from "./TableRow";
 import "../css/table.css";
 
 export default function Table(props) {
+    const [errorMatrix, setErrorMatrix] = useState(null);
+
+    useEffect(() => {
+        setErrorMatrix(
+            Array(props.nodesAmount).fill(
+                Array(props.nodesAmount).fill("")
+            )
+        );
+    }, [props.nodesAmount]);
+
     function deepCopy(arr) {
         let arrCopy = [];
         for (let i = 0; i < arr.length; ++i) {
@@ -23,6 +34,36 @@ export default function Table(props) {
         }
 
         props.setMatrix(updatedMatrix);
+    }
+
+    function cleanCell(rowNumber, colNumber) {
+        let updatedMatrix = deepCopy(props.matrix);
+        updatedMatrix[rowNumber][colNumber] = "-";
+        props.setMatrix(updatedMatrix);
+
+        const cellId = `cell_${rowNumber}:${colNumber}`;
+        let cell = document.getElementById(cellId);
+        cell.value = "";
+    }
+
+    function checkErrorMatrix(arr) {
+        for (let i = 0; i < props.nodesAmount; ++i) {
+            for (let j = 0; j < props.nodesAmount; ++j) {
+                if (arr[i][j] !== "") {
+                    props.setErrorMessageBottom(arr[i][j]);
+                    return;
+                }
+            }
+        }
+
+        props.setErrorMessageBottom("");
+    }
+
+    function setCellError(rowNumber, colNumber, val) {
+        let newErrorMatrix = deepCopy(errorMatrix);
+        newErrorMatrix[rowNumber][colNumber] = val;
+        setErrorMatrix(newErrorMatrix);
+        checkErrorMatrix(newErrorMatrix);
     }
 
     return (<div>
@@ -49,7 +90,8 @@ export default function Table(props) {
                             row={row}
                             rowNumber={rowNumber}
                             setCell={setCell}
-                            setMatrixErrorCount={props.setMatrixErrorCount}
+                            cleanCell={cleanCell}
+                            setCellError={setCellError}
                         />
                     );
                 })

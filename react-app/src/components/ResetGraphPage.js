@@ -16,7 +16,6 @@ export default function ResetGraphPage() {
 
     const [errorMessageTop, setErrorMessageTop] = useState("");
     const [errorMessageBottom, setErrorMessageBottom] = useState("");
-    const [matrixErrorCount, setMatrixErrorCount] = useState(0);
 
     const [graphData, setGraphData] = useState(null);
     const [readyToVisualize, setReadyToVisualize] = useState(false);
@@ -34,19 +33,32 @@ export default function ResetGraphPage() {
         if (!Number.isInteger(val) || val < 1) {
             setErrorMessageTop("Ошибка: введите натуральное число");
             return;
+        } else if (val === 1) {
+            setErrorMessageTop("Ошибка: количество вершин не должно быть меньше 2");
+            return;
         } else if (val > 16) {
             setErrorMessageTop("Ошибка: количество вершин не должно превышать 16");
             return;
         }
 
         setNodesAmount(val);
-        setErrorMessageTop("");
+        setMatrix((oldMatrix) => {
+            let newMatrix = [];
+            for (let i = 0; i < val; ++i) {
+                newMatrix.push(Array(val).fill("-"))
+            }
 
-        setMatrix(
-            Array(val).fill(
-                Array(val).fill("-")
-            )
-        );
+            const n = Math.min(val, oldMatrix.length);
+            for (let i = 0; i < n; ++i) {
+                for (let j = 0; j < n; ++j) {
+                    if (oldMatrix[i][j] !== "-") {
+                        newMatrix[i][j] = oldMatrix[i][j];
+                    }
+                }
+            }
+            return newMatrix;
+        });
+        setErrorMessageTop("");
     }
 
     function getGraphData() {
@@ -66,9 +78,15 @@ export default function ResetGraphPage() {
 
     if (readyToVisualize) {
         return (
-            <Navigate to="/" state={{graphData: graphData}} />
+            <Navigate to="/" state={{graphData: graphData}}/>
         );
     }
+
+    const disableVisualization = (mode === "new-graph") && (
+        (nodesAmount === null)
+        || (errorMessageTop !== "")
+        || (errorMessageBottom !== "")
+    );
 
     return (<div>
         <h1>Dijkstra visualisation | Create your graph</h1>
@@ -76,8 +94,8 @@ export default function ResetGraphPage() {
 
         {mode === "new-graph" &&
             <div>
-                <GraphTypeSelect handleOnChange={handleGraphTypeChange} />
-                <NodesAmountInput handleOnChange={handleNodesAmountChange} />
+                <GraphTypeSelect handleOnChange={handleGraphTypeChange}/>
+                <NodesAmountInput handleOnChange={handleNodesAmountChange}/>
 
                 {errorMessageTop ? <h4 style={{color: "red"}}>{errorMessageTop}</h4> : <br/>}
 
@@ -87,7 +105,7 @@ export default function ResetGraphPage() {
                         graphType={graphType}
                         matrix={matrix}
                         setMatrix={setMatrix}
-                        setMatrixErrorCount={setMatrixErrorCount}
+                        setErrorMessageBottom={setErrorMessageBottom}
                     />
                 }
 
@@ -95,6 +113,9 @@ export default function ResetGraphPage() {
             </div>
         }
 
-        <button type="button" onClick={startVisualization}>Start visualization</button>
+        <button type="button"
+                disabled={disableVisualization}
+                onClick={startVisualization}
+        >Start visualization</button>
     </div>)
 }
