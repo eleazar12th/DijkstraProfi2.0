@@ -1,7 +1,7 @@
 import Edge from "../structures/edge";
 import GraphData from "../structures/graph-data";
 
-const directedGraphMatrix = [
+const directedGraphMatrix1 = [
     ["-", 7, 9, "-", "-", 14],
     ["-", "-", 10, 15, "-", "-"],
     ["-", "-", "-", 11, "-", 2],
@@ -9,7 +9,20 @@ const directedGraphMatrix = [
     ["-", "-", "-", "-", "-", 9],
     ["-", "-", "-", "-", "-", "-"]
 ];
-export const DIRECTED_GRAPH_DATA = new GraphData(directedGraphMatrix, "directed");
+export const DIRECTED_GRAPH_DATA_1 = new GraphData(directedGraphMatrix1, "directed");
+
+const directedGraphMatrix2 = [
+    ["-", 1, "-", 5, "-", 3, "-", "-", "-"],
+    ["-", "-", 2, "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", 1, 3, "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", 4, "-", "-"],
+    [3, "-", "-", "-", "-", "-", "-", 4, "-"],
+    ["-", "-", "-", 3, "-", "-", 1, "-", "-"],
+    ["-", "-", "-", "-", 2, "-", "-", "-", "-"],
+    ["-", "-", 4, "-", "-", "-", "-", "-", 7],
+    [6, "-", "-", "-", 2, "-", "-", "-", "-"]
+];
+export const DIRECTED_GRAPH_DATA_2 = new GraphData(directedGraphMatrix2, "directed");
 
 const undirectedGraphMatrix = [
     ["-", 7, 9, "-", "-", 14],

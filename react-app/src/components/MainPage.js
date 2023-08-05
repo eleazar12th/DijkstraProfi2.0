@@ -3,10 +3,12 @@ import {Link, useLocation} from "react-router-dom";
 import StartInput from "./StartInput";
 import GraphConstructor from "./GraphConstructor";
 import Dijkstra from "../dijkstra";
+import SpeedRange from "./SpeedRange";
 import * as defaultVal from "../values/default-values";
 
-export default function MainPage(props) {
+export default function MainPage() {
     const [start, setStart] = useState(1);
+    const [speed, setSpeed] = useState(1);
     const [index, setIndex] = useState(0);
     const [paused, setPaused] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
@@ -18,7 +20,7 @@ export default function MainPage(props) {
                 return locationState.graphData;
             }
 
-            return defaultVal.DIRECTED_GRAPH_DATA;
+            return defaultVal.DIRECTED_GRAPH_DATA_1;
         },
         [locationState]
     )
@@ -40,9 +42,9 @@ export default function MainPage(props) {
             if (index === maxIndex) {
                 setPaused(true);
             }
-        }, props.time * 1000);
+        }, 1000 / speed);
         return () => clearInterval(interval);
-    }, [paused, index, maxIndex, props.time]);
+    }, [paused, index, maxIndex, speed]);
 
     function onPause() {
         setPaused(true);
@@ -113,6 +115,8 @@ export default function MainPage(props) {
         <Link to={"/create_graph"}>
             <button type="button" style={{marginLeft: "80px"}}>Another graph</button>
         </Link>
+
+        <SpeedRange speed={speed} setSpeed={setSpeed} />
 
         <GraphConstructor graphData={graphData} graphState={graphStates[index]}/>
     </div>);

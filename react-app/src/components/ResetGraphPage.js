@@ -4,6 +4,7 @@ import ModeSelect from "./ModeSelect";
 import GraphTypeSelect from "./GraphTypeSelect";
 import NodesAmountInput from "./NodesAmountInput";
 import Table from "./Table";
+import LevelSelect from "./LevelSelect";
 import GraphData from "../structures/graph-data";
 import * as defaultVal from "../values/default-values";
 
@@ -13,6 +14,8 @@ export default function ResetGraphPage() {
 
     const [mode, setMode] = useState("new-graph");
     const [nodesAmount, setNodesAmount] = useState(null);
+
+    const [directedLevel, setDirectedLevel] = useState("easy");
 
     const [errorMessageTop, setErrorMessageTop] = useState("");
     const [errorMessageBottom, setErrorMessageBottom] = useState("");
@@ -26,6 +29,10 @@ export default function ResetGraphPage() {
 
     function handleGraphTypeChange(evt) {
         setGraphType(evt.target.value);
+    }
+
+    function handleLevelChange(evt) {
+        setDirectedLevel(evt.target.value);
     }
 
     function handleNodesAmountChange(evt) {
@@ -64,8 +71,10 @@ export default function ResetGraphPage() {
     function getGraphData() {
         if (mode === "use-undirected") {
             return defaultVal.UNDIRECTED_GRAPH_DATA;
-        } else if (mode === "use-directed") {
-            return defaultVal.DIRECTED_GRAPH_DATA;
+        } else if (mode === "use-directed" && directedLevel === "easy") {
+            return defaultVal.DIRECTED_GRAPH_DATA_1;
+        } else if (mode === "use-directed" && directedLevel === "hard") {
+            return defaultVal.DIRECTED_GRAPH_DATA_2;
         }
 
         return new GraphData(matrix, graphType);
@@ -112,6 +121,8 @@ export default function ResetGraphPage() {
                 {errorMessageBottom && <h4 style={{color: "red"}}>{errorMessageBottom}</h4>}
             </div>
         }
+
+        {mode === "use-directed" && <LevelSelect handleLevelChange={handleLevelChange} />}
 
         <button type="button"
                 disabled={disableVisualization}
