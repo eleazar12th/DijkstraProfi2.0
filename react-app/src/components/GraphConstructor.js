@@ -10,6 +10,14 @@ function hideArrow(edge) {
     }
 }
 
+function enableSmooth(edge) {
+    edge.smooth = {
+        enabled: true,
+        type: "curvedCCW",
+        roundness: 0.5
+    }
+}
+
 export default function GraphConstructor(props) {
     function createGraphNodesEdges(graphData, graphState) {
         const graphType = graphData.graphType;
@@ -47,6 +55,9 @@ export default function GraphConstructor(props) {
                         continue;
 
                     hideArrow(newEdge);
+                } else {
+                    if (edge.curved)
+                        enableSmooth(newEdge);
                 }
 
                 edges.push(newEdge);

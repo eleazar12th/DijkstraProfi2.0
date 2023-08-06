@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import ModeSelect from "./ModeSelect";
 import GraphTypeSelect from "./GraphTypeSelect";
 import NodesAmountInput from "./NodesAmountInput";
@@ -9,8 +9,13 @@ import GraphData from "../structures/graph-data";
 import * as defaultVal from "../values/default-values";
 
 export default function ResetGraphPage() {
+    const locationState = useLocation().state;
+    const [graphTypeInitValue, setGraphTypeInitValue] = useState(
+        locationState ? locationState.graphType : "undirected"
+    );
+
     const [matrix, setMatrix] = useState([]);
-    const [graphType, setGraphType] = useState("undirected");
+    const [graphType, setGraphType] = useState(graphTypeInitValue);
 
     const [mode, setMode] = useState("new-graph");
     const [nodesAmount, setNodesAmount] = useState(null);
@@ -25,6 +30,14 @@ export default function ResetGraphPage() {
 
     function handleModeChange(evt) {
         setMode(evt.target.value);
+
+        setGraphTypeInitValue(graphType);
+        setNodesAmount(null);
+        setMatrix([]);
+        setErrorMessageTop("");
+        setErrorMessageBottom("");
+
+        setDirectedLevel("easy");
     }
 
     function handleGraphTypeChange(evt) {
@@ -33,6 +46,25 @@ export default function ResetGraphPage() {
 
     function handleLevelChange(evt) {
         setDirectedLevel(evt.target.value);
+    }
+
+    function changeMatrixSize(newSize) {
+        setMatrix((oldMatrix) => {
+            let newMatrix = [];
+            for (let i = 0; i < newSize; ++i) {
+                newMatrix.push(Array(newSize).fill("-"))
+            }
+
+            const n = Math.min(newSize, oldMatrix.length);
+            for (let i = 0; i < n; ++i) {
+                for (let j = 0; j < n; ++j) {
+                    if (oldMatrix[i][j] !== "-") {
+                        newMatrix[i][j] = oldMatrix[i][j];
+                    }
+                }
+            }
+            return newMatrix;
+        });
     }
 
     function handleNodesAmountChange(evt) {
@@ -49,22 +81,7 @@ export default function ResetGraphPage() {
         }
 
         setNodesAmount(val);
-        setMatrix((oldMatrix) => {
-            let newMatrix = [];
-            for (let i = 0; i < val; ++i) {
-                newMatrix.push(Array(val).fill("-"))
-            }
-
-            const n = Math.min(val, oldMatrix.length);
-            for (let i = 0; i < n; ++i) {
-                for (let j = 0; j < n; ++j) {
-                    if (oldMatrix[i][j] !== "-") {
-                        newMatrix[i][j] = oldMatrix[i][j];
-                    }
-                }
-            }
-            return newMatrix;
-        });
+        changeMatrixSize(val);
         setErrorMessageTop("");
     }
 
@@ -103,7 +120,8 @@ export default function ResetGraphPage() {
 
         {mode === "new-graph" &&
             <div>
-                <GraphTypeSelect handleOnChange={handleGraphTypeChange}/>
+                <GraphTypeSelect handleOnChange={handleGraphTypeChange}
+                                 defaultType={graphTypeInitValue}/>
                 <NodesAmountInput handleOnChange={handleNodesAmountChange}/>
 
                 {errorMessageTop ? <h4 style={{color: "red"}}>{errorMessageTop}</h4> : <br/>}

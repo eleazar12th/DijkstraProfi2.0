@@ -27,11 +27,16 @@ export default class GraphData {
                     continue;
 
                 if (this.graphType === "directed") {
-                    this.edges[v].push(
-                        new Edge(edge_id++, u, matrix[i][j])
-                    );
-                } else if (this.graphType === "undirected" && v < u) {
+                    let curved = false;
+                    if (matrix[j][i] !== "-" && v > u) {
+                        curved = true;
+                    }
 
+                    this.edges[v].push(
+                        new Edge(edge_id++, u, matrix[i][j], curved)
+                    );
+
+                } else if (this.graphType === "undirected" && v < u) {
                     this.edges[v].push(
                         new Edge(edge_id, u, matrix[i][j])
                     );

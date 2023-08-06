@@ -20,7 +20,7 @@ export default function MainPage() {
                 return locationState.graphData;
             }
 
-            return defaultVal.DIRECTED_GRAPH_DATA_1;
+            return defaultVal.UNDIRECTED_GRAPH_DATA;
         },
         [locationState]
     )
@@ -112,7 +112,7 @@ export default function MainPage() {
         <button type="button" onClick={onStepForward}>Step forward</button>
         <button type="button" onClick={onSkipForward}>Skip forward</button>
 
-        <Link to={"/create_graph"}>
+        <Link to={"/create_graph"} state={{graphType: graphData.graphType}}>
             <button type="button" style={{marginLeft: "80px"}}>Another graph</button>
         </Link>
 
