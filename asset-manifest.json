@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/DijkstraProfi2.0/static/css/main.3ee8bd0d.css",
-    "main.js": "/DijkstraProfi2.0/static/js/main.f034c222.js",
+    "main.js": "/DijkstraProfi2.0/static/js/main.83df6f4e.js",
     "index.html": "/DijkstraProfi2.0/index.html",
     "main.3ee8bd0d.css.map": "/DijkstraProfi2.0/static/css/main.3ee8bd0d.css.map",
-    "main.f034c222.js.map": "/DijkstraProfi2.0/static/js/main.f034c222.js.map"
+    "main.83df6f4e.js.map": "/DijkstraProfi2.0/static/js/main.83df6f4e.js.map"
   },
   "entrypoints": [
     "static/css/main.3ee8bd0d.css",
-    "static/js/main.f034c222.js"
+    "static/js/main.83df6f4e.js"
   ]
 }
