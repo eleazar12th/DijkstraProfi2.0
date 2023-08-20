@@ -101,24 +101,26 @@ export default function MainPage() {
     }
 
     return (<div>
-        <Menu />
+        <Menu activeLinkName="visualize" />
 
-        <StartInput handleOnBlur={handleStartChange}/>
-        {errorMessage ? <h4 style={{color: "red"}}>{errorMessage}</h4> : <br/>}
+        <div className="page-content">
+            <StartInput handleOnBlur={handleStartChange}/>
+            {errorMessage ? <h4 style={{color: "red"}}>{errorMessage}</h4> : <br/>}
 
-        <button type="button" onClick={onSkipBack}>Skip back</button>
-        <button type="button" onClick={onStepBack}>Step back</button>
-        {paused && <button type="button" onClick={onPlay}>Play</button>}
-        {!paused && <button type="button" onClick={onPause}>Pause</button>}
-        <button type="button" onClick={onStepForward}>Step forward</button>
-        <button type="button" onClick={onSkipForward}>Skip forward</button>
+            <button type="button" onClick={onSkipBack}>Skip back</button>
+            <button type="button" onClick={onStepBack}>Step back</button>
+            {paused && <button type="button" onClick={onPlay}>Play</button>}
+            {!paused && <button type="button" onClick={onPause}>Pause</button>}
+            <button type="button" onClick={onStepForward}>Step forward</button>
+            <button type="button" onClick={onSkipForward}>Skip forward</button>
 
-        <Link to={"/create_graph"} state={{graphType: graphData.graphType}}>
-            <button type="button" style={{marginLeft: "80px"}}>Another graph</button>
-        </Link>
+            <Link to={"/create_graph"} state={{graphType: graphData.graphType}}>
+                <button type="button" style={{marginLeft: "80px"}}>Another graph</button>
+            </Link>
 
-        <SpeedRange speed={speed} setSpeed={setSpeed} />
+            <SpeedRange speed={speed} setSpeed={setSpeed} />
 
-        <GraphConstructor graphData={graphData} graphState={graphStates[index]}/>
+            <GraphConstructor graphData={graphData} graphState={graphStates[index]}/>
+        </div>
     </div>);
 }

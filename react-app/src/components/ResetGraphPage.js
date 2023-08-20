@@ -5,6 +5,7 @@ import GraphTypeSelect from "./GraphTypeSelect";
 import NodesAmountInput from "./NodesAmountInput";
 import Table from "./Table";
 import LevelSelect from "./LevelSelect";
+import Menu from "./Menu";
 import GraphData from "../structures/graph-data";
 import * as defaultVal from "../values/default-values";
 
@@ -115,36 +116,39 @@ export default function ResetGraphPage() {
     );
 
     return (<div>
-        <h1>Dijkstra visualisation | Create your graph</h1>
-        <ModeSelect handleOnChange={handleModeChange}/>
+        <Menu activeLinkName="another" />
 
-        {mode === "new-graph" &&
-            <div>
-                <GraphTypeSelect handleOnChange={handleGraphTypeChange}
-                                 defaultType={graphTypeInitValue}/>
-                <NodesAmountInput handleOnChange={handleNodesAmountChange}/>
+        <div className="page-content">
+            <ModeSelect handleOnChange={handleModeChange}/>
 
-                {errorMessageTop ? <h4 style={{color: "red"}}>{errorMessageTop}</h4> : <br/>}
+            {mode === "new-graph" &&
+                <div>
+                    <GraphTypeSelect handleOnChange={handleGraphTypeChange}
+                                     defaultType={graphTypeInitValue}/>
+                    <NodesAmountInput handleOnChange={handleNodesAmountChange}/>
 
-                {nodesAmount &&
-                    <Table
-                        nodesAmount={nodesAmount}
-                        graphType={graphType}
-                        matrix={matrix}
-                        setMatrix={setMatrix}
-                        setErrorMessageBottom={setErrorMessageBottom}
-                    />
-                }
+                    {errorMessageTop ? <h4 style={{color: "red"}}>{errorMessageTop}</h4> : <br/>}
 
-                {errorMessageBottom && <h4 style={{color: "red"}}>{errorMessageBottom}</h4>}
-            </div>
-        }
+                    {nodesAmount &&
+                        <Table
+                            nodesAmount={nodesAmount}
+                            graphType={graphType}
+                            matrix={matrix}
+                            setMatrix={setMatrix}
+                            setErrorMessageBottom={setErrorMessageBottom}
+                        />
+                    }
 
-        {mode === "use-directed" && <LevelSelect handleLevelChange={handleLevelChange} />}
+                    {errorMessageBottom && <h4 style={{color: "red"}}>{errorMessageBottom}</h4>}
+                </div>
+            }
 
-        <button type="button"
-                disabled={disableVisualization}
-                onClick={startVisualization}
-        >Start visualization</button>
+            {mode === "use-directed" && <LevelSelect handleLevelChange={handleLevelChange} />}
+
+            <button type="button"
+                    disabled={disableVisualization}
+                    onClick={startVisualization}
+            >Start visualization</button>
+        </div>
     </div>)
 }

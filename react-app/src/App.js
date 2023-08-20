@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import MainPage from "./components/MainPage";
 import ResetGraphPage from "./components/ResetGraphPage";
+import "./css/main.css";
 
 export default function App() {
     return (<div>
