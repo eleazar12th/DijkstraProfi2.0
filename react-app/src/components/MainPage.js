@@ -4,6 +4,7 @@ import StartInput from "./StartInput";
 import GraphConstructor from "./GraphConstructor";
 import Dijkstra from "../dijkstra";
 import SpeedRange from "./SpeedRange";
+import Menu from "./Menu";
 import * as defaultVal from "../values/default-values";
 
 export default function MainPage() {
@@ -100,9 +101,9 @@ export default function MainPage() {
     }
 
     return (<div>
-        <h1>Dijkstra visualisation</h1>
-        <StartInput handleOnBlur={handleStartChange}/>
+        <Menu />
 
+        <StartInput handleOnBlur={handleStartChange}/>
         {errorMessage ? <h4 style={{color: "red"}}>{errorMessage}</h4> : <br/>}
 
         <button type="button" onClick={onSkipBack}>Skip back</button>
