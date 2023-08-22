@@ -1,5 +1,6 @@
 import {useEffect, useState, useMemo} from "react";
-import {Link, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
+import ControlButton from "./ControlButton";
 import StartInput from "./StartInput";
 import GraphConstructor from "./GraphConstructor";
 import Dijkstra from "../dijkstra";
@@ -101,24 +102,31 @@ export default function MainPage() {
     }
 
     return (<div>
-        <Menu activeLinkName="visualize" />
+        <Menu activeLinkName="visualize" graphType={graphData.graphType} />
 
         <div className="page-content">
-            <StartInput handleOnBlur={handleStartChange}/>
-            {errorMessage ? <h4 style={{color: "red"}}>{errorMessage}</h4> : <br/>}
 
-            <button type="button" onClick={onSkipBack}>Skip back</button>
-            <button type="button" onClick={onStepBack}>Step back</button>
-            {paused && <button type="button" onClick={onPlay}>Play</button>}
-            {!paused && <button type="button" onClick={onPause}>Pause</button>}
-            <button type="button" onClick={onStepForward}>Step forward</button>
-            <button type="button" onClick={onSkipForward}>Skip forward</button>
+            <div className="container">
+                <div className="row">
+                    <div className="col-8">
+                        <ControlButton onClick={onSkipBack} text={"Skip back"} />
+                        <ControlButton onClick={onStepBack} text={"Step back"} />
+                        {paused && <ControlButton onClick={onPlay} text={"Play"} />}
+                        {!paused && <ControlButton onClick={onPause} text={"Pause"} />}
+                        <ControlButton onClick={onStepForward} text={"Step forward"} />
+                        <ControlButton onClick={onSkipForward} text={"Skip forward"} />
+                    </div>
 
-            <Link to={"/create_graph"} state={{graphType: graphData.graphType}}>
-                <button type="button" style={{marginLeft: "80px"}}>Another graph</button>
-            </Link>
+                    <div className="col-4">
+                        <StartInput handleStartChange={handleStartChange}/>
+                        {errorMessage ? <h4 style={{color: "red"}}>{errorMessage}</h4> : <br/>}
+                    </div>
+                </div>
 
-            <SpeedRange speed={speed} setSpeed={setSpeed} />
+                <div className="row">
+                    <SpeedRange speed={speed} setSpeed={setSpeed} />
+                </div>
+            </div>
 
             <GraphConstructor graphData={graphData} graphState={graphStates[index]}/>
         </div>

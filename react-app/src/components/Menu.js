@@ -29,7 +29,8 @@ export default function Menu(props) {
                         </li>
 
                         <li className="nav-item">
-                            <Link className={navLinkClassName("another")} to="/create_graph">
+                            <Link className={navLinkClassName("another")} to="/create_graph"
+                                  state={{graphType: props.graphType}}>
                                 Another graph
                             </Link>
                         </li>

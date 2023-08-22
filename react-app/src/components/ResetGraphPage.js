@@ -12,7 +12,7 @@ import * as defaultVal from "../values/default-values";
 export default function ResetGraphPage() {
     const locationState = useLocation().state;
     const [graphTypeInitValue, setGraphTypeInitValue] = useState(
-        locationState ? locationState.graphType : "undirected"
+        locationState && locationState.graphType ? locationState.graphType : "undirected"
     );
 
     const [matrix, setMatrix] = useState([]);

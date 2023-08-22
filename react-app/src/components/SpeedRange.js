@@ -3,12 +3,11 @@ export default function SpeedRange(props) {
         props.setSpeed(+evt.target.value);
     }
 
-    return (<div>
-        <br />
-        <label htmlFor={"speed-range"}>Speed </label>
-        <input type="range" id={"speed-range"} name={"speed-range"}
+    return (<div className="speed-range">
+        <label htmlFor={"speed-range-input"} className="form-label">Speed </label>
+        <input type="range" id={"speed-range-input"} name={"speed-range-input"}
                min={"0.25"} max={"3"} step={"0.25"} defaultValue={"1"}
                onChange={handleOnChange} />
-        <span id={"speed-range-value"}> {props.speed}</span>
+        <span id={"speed-range-value"} className="form-label"> {props.speed}</span>
     </div>);
 }
