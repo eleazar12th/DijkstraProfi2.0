@@ -118,25 +118,36 @@ export default function ResetGraphPage() {
     return (<div>
         <Menu activeLinkName="another" />
 
-        <div className="page-content">
-            <ModeSelect handleOnChange={handleModeChange}/>
+        <div className="container page-content">
+            <div className="row justify-content-md-center">
+                <ModeSelect handleOnChange={handleModeChange}/>
+            </div>
 
             {mode === "new-graph" &&
                 <div>
-                    <GraphTypeSelect handleOnChange={handleGraphTypeChange}
-                                     defaultType={graphTypeInitValue}/>
-                    <NodesAmountInput handleOnChange={handleNodesAmountChange}/>
+                    <div className="row justify-content-md-center">
+                        <GraphTypeSelect handleOnChange={handleGraphTypeChange}
+                                         defaultType={graphTypeInitValue}/>
+                    </div>
 
-                    {errorMessageTop ? <h4 style={{color: "red"}}>{errorMessageTop}</h4> : <br/>}
+                    <div className="row justify-content-md-center">
+                        <NodesAmountInput handleOnChange={handleNodesAmountChange}/>
+                    </div>
+
+                    <div className="row justify-content-md-center">
+                        {errorMessageTop ? <h4 style={{color: "red"}}>{errorMessageTop}</h4> : <br/>}
+                    </div>
 
                     {nodesAmount &&
-                        <Table
-                            nodesAmount={nodesAmount}
-                            graphType={graphType}
-                            matrix={matrix}
-                            setMatrix={setMatrix}
-                            setErrorMessageBottom={setErrorMessageBottom}
-                        />
+                        <div className="row justify-content-md-center">
+                            <Table
+                                nodesAmount={nodesAmount}
+                                graphType={graphType}
+                                matrix={matrix}
+                                setMatrix={setMatrix}
+                                setErrorMessageBottom={setErrorMessageBottom}
+                            />
+                        </div>
                     }
 
                     {errorMessageBottom && <h4 style={{color: "red"}}>{errorMessageBottom}</h4>}
@@ -145,10 +156,12 @@ export default function ResetGraphPage() {
 
             {mode === "use-directed" && <LevelSelect handleLevelChange={handleLevelChange} />}
 
-            <button type="button"
-                    disabled={disableVisualization}
-                    onClick={startVisualization}
-            >Start visualization</button>
+            <div className="text-center">
+                <button type="button" className="btn btn-primary"
+                        disabled={disableVisualization}
+                        onClick={startVisualization}
+                >Start visualization</button>
+            </div>
         </div>
     </div>)
 }

@@ -1,6 +1,7 @@
 export default function ModeSelect(props) {
-    return (<div>
-        <select name="graph-type-select" id="graph-type-select"
+    return (<div className="input-group input-group-sm mb-3 width-300">
+        <select className="form-select form-select-sm"
+                name="graph-type-select" id="graph-type-select"
                 onChange={props.handleOnChange}>
 
             <option value="new-graph">Custom new graph</option>
@@ -8,7 +9,6 @@ export default function ModeSelect(props) {
             <option value="use-directed">Use a ready-made directed graph</option>
 
         </select>
-        <br />
         <br />
     </div>);
 }
