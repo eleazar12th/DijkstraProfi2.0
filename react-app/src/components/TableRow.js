@@ -3,7 +3,9 @@ import TableCell from "./TableCell";
 export default function TableRow(props) {
     return (
         <tr>
-            <th>{props.rowNumber + 1}</th>
+            <th>
+                <span className="table-row-span">{props.rowNumber + 1}</span>
+            </th>
             {props.row.map((cell, colNumber) => {
                 let newKey = `cell_${props.rowNumber}:${colNumber}`;
                 return (

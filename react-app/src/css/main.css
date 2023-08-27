@@ -2,8 +2,13 @@
     margin-top: 30px;
 }
 
-button {
+.control-btn {
     margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.control-btn-last {
+    margin-bottom: 30px;
 }
 
 input {
@@ -16,10 +21,15 @@ input[type=range] {
     accent-color: #212529;
 }
 
-.width-200 {
-    width: 200px;
+.width-310 {
+    width: 310px;
 }
 
-.width-300 {
-    width: 300px;
+.alert-sm {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.alert-center {
+    display: grid;
 }

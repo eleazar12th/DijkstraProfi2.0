@@ -3,7 +3,7 @@ export default function TableCell(props) {
         props.setCellError(props.rowNumber, props.colNumber, msg);
     }
 
-    const cellTitle = `${props.rowNumber + 1}=>${props.colNumber + 1}`;
+    const cellTitle = `из ${props.rowNumber + 1} в ${props.colNumber + 1}`;
 
     function handleOnChange(evt) {
         let val = +evt.target.value;
@@ -13,13 +13,13 @@ export default function TableCell(props) {
             setError("");
             return;
         } else if (!evt.target.value.trim().length || !Number.isInteger(val)) {
-            setError(`Ошибка в ребре ${cellTitle}. Длина ребра должна быть целым числом`);
+            setError(`Ошибка в ребре ${cellTitle}. Длина ребра должна быть целым числом.`);
             return;
         } else if (val < 0) {
-            setError(`Ошибка в ребре ${cellTitle}. Длина ребра не может быть меньше 0`);
+            setError(`Ошибка в ребре ${cellTitle}. Длина ребра не может быть меньше 0.`);
             return;
         } else if (val > 1000) {
-            setError(`Ошибка в ребре ${cellTitle}. Длина ребра не может быть больше 1000`);
+            setError(`Ошибка в ребре ${cellTitle}. Длина ребра не может быть больше 1000.`);
             return;
         }
 
@@ -32,7 +32,7 @@ export default function TableCell(props) {
     return (
         <td>
             <input type="text" id={cellId} placeholder="-"
-                   className="table-input" onChange={handleOnChange}/>
+                   className="form-control form-control-sm table-input" onChange={handleOnChange}/>
         </td>
     );
 }

@@ -67,11 +67,13 @@ export default function Table(props) {
     }
 
     return (<div>
-        <h3>Fill in the adjacency matrix</h3>
-        <table border="1">
+        <br />
+        <table className="table table-sm table-bordered" border="1">
             <tbody>
             <tr>
-                <th>from\to</th>
+                <th>
+                    <span className="from-to-span">from\to</span>
+                </th>
                 {Array(props.nodesAmount)
                     .fill(true)
                     .map((item, index) => {

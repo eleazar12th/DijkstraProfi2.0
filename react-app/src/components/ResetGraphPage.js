@@ -134,27 +134,43 @@ export default function ResetGraphPage() {
                         <NodesAmountInput handleOnChange={handleNodesAmountChange}/>
                     </div>
 
-                    <div className="row justify-content-md-center">
-                        {errorMessageTop ? <h4 style={{color: "red"}}>{errorMessageTop}</h4> : <br/>}
-                    </div>
-
-                    {nodesAmount &&
+                    {nodesAmount && !errorMessageTop &&
                         <div className="row justify-content-md-center">
-                            <Table
-                                nodesAmount={nodesAmount}
-                                graphType={graphType}
-                                matrix={matrix}
-                                setMatrix={setMatrix}
-                                setErrorMessageBottom={setErrorMessageBottom}
-                            />
+                            <div className="alert alert-light alert-sm text-center w-50" role="alert">
+                                Fill in the adjacency matrix
+                            </div>
                         </div>
                     }
 
-                    {errorMessageBottom && <h4 style={{color: "red"}}>{errorMessageBottom}</h4>}
+                    {errorMessageTop &&
+                        <div className="row justify-content-md-center">
+                            <div className="alert alert-danger alert-sm text-center w-50" role="alert">
+                                {errorMessageTop}
+                            </div>
+                        </div>
+                    }
+
+                    {nodesAmount &&
+                        <Table
+                            nodesAmount={nodesAmount}
+                            graphType={graphType}
+                            matrix={matrix}
+                            setMatrix={setMatrix}
+                            setErrorMessageBottom={setErrorMessageBottom}
+                        />
+                    }
+
+                    {errorMessageBottom && <div className="row justify-content-md-center">
+                        <div className="alert alert-danger alert-sm text-center w-75" role="alert">
+                            {errorMessageBottom}
+                        </div>
+                    </div>}
                 </div>
             }
 
-            {mode === "use-directed" && <LevelSelect handleLevelChange={handleLevelChange} />}
+            {mode === "use-directed" && <div className="row justify-content-md-center">
+                <LevelSelect handleLevelChange={handleLevelChange} />
+            </div>}
 
             <div className="text-center">
                 <button type="button" className="btn btn-primary"

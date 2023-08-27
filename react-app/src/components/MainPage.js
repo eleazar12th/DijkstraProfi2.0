@@ -119,12 +119,20 @@ export default function MainPage() {
 
                     <div className="col-4">
                         <StartInput handleStartChange={handleStartChange}/>
-                        {errorMessage ? <h4 style={{color: "red"}}>{errorMessage}</h4> : <br/>}
+                        <br />
                     </div>
                 </div>
 
                 <div className="row">
-                    <SpeedRange speed={speed} setSpeed={setSpeed} />
+                    <div className="col-8">
+                        <SpeedRange speed={speed} setSpeed={setSpeed} />
+                    </div>
+
+                    <div className="col-4">
+                        {errorMessage && <div className="alert alert-danger alert-sm" role="alert">
+                            {errorMessage}
+                        </div>}
+                    </div>
                 </div>
             </div>
 

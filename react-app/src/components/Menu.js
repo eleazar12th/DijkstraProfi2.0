@@ -36,15 +36,15 @@ export default function Menu(props) {
                         </li>
 
                         <li className="nav-item">
-                            <a className={navLinkClassName("feel")} href="#">
+                            <Link className={navLinkClassName("feel")} to="/feel_algorithm">
                                 Feel algorithm
-                            </a>
+                            </Link>
                         </li>
 
                         <li className="nav-item">
-                            <a className={navLinkClassName("help")} href="#">
+                            <Link className={navLinkClassName("help")} to="/help">
                                 Help
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
