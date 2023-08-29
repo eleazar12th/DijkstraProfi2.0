@@ -92,8 +92,20 @@ export default function GraphConstructor(props) {
         physics: true
     };
 
-    return (<div>
-        <Graph graph={graph} options={options} />
-        <p>{props.graphState.description}</p>
+    return (<div className="row">
+        <div className="col-6">
+            <Graph graph={graph} options={options} />
+        </div>
+
+        <div className="col-6 d-flex align-items-center">
+            <div className="card w-100">
+                <div className="card-header">
+                    Current algorithm step
+                </div>
+                <div className="card-body">
+                    <p>{props.graphState.description}</p>
+                </div>
+            </div>
+        </div>
     </div>);
 }

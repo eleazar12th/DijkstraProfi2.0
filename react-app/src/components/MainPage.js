@@ -104,35 +104,32 @@ export default function MainPage() {
     return (<div>
         <Menu activeLinkName="visualize" graphType={graphData.graphType} />
 
-        <div className="page-content">
-
-            <div className="container">
-                <div className="row">
-                    <div className="col-8">
-                        <ControlButton onClick={onSkipBack} text={"Skip back"} />
-                        <ControlButton onClick={onStepBack} text={"Step back"} />
-                        {paused && <ControlButton onClick={onPlay} text={"Play"} />}
-                        {!paused && <ControlButton onClick={onPause} text={"Pause"} />}
-                        <ControlButton onClick={onStepForward} text={"Step forward"} />
-                        <ControlButton onClick={onSkipForward} text={"Skip forward"} />
-                    </div>
-
-                    <div className="col-4">
-                        <StartInput handleStartChange={handleStartChange}/>
-                        <br />
-                    </div>
+        <div className="page-content container">
+            <div className="row">
+                <div className="col-8">
+                    <ControlButton onClick={onSkipBack} text={"Skip back"} />
+                    <ControlButton onClick={onStepBack} text={"Step back"} />
+                    {paused && <ControlButton onClick={onPlay} text={"Play"} />}
+                    {!paused && <ControlButton onClick={onPause} text={"Pause"} />}
+                    <ControlButton onClick={onStepForward} text={"Step forward"} />
+                    <ControlButton onClick={onSkipForward} text={"Skip forward"} />
                 </div>
 
-                <div className="row">
-                    <div className="col-8">
-                        <SpeedRange speed={speed} setSpeed={setSpeed} />
-                    </div>
+                <div className="col-4">
+                    <StartInput handleStartChange={handleStartChange}/>
+                    <br />
+                </div>
+            </div>
 
-                    <div className="col-4">
-                        {errorMessage && <div className="alert alert-danger alert-sm" role="alert">
-                            {errorMessage}
-                        </div>}
-                    </div>
+            <div className="row">
+                <div className="col-8">
+                    <SpeedRange speed={speed} setSpeed={setSpeed} />
+                </div>
+
+                <div className="col-4">
+                    {errorMessage && <div className="alert alert-danger alert-sm" role="alert">
+                        {errorMessage}
+                    </div>}
                 </div>
             </div>
 

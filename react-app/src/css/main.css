@@ -1,5 +1,6 @@
 .page-content {
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .control-btn {
@@ -32,4 +33,9 @@ input[type=range] {
 
 .alert-center {
     display: grid;
+}
+
+.algorithm-step {
+    margin-top: auto;
+    margin-bottom: auto;
 }

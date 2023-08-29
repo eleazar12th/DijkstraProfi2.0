@@ -161,7 +161,7 @@ export default function ResetGraphPage() {
                     }
 
                     {errorMessageBottom && <div className="row justify-content-md-center">
-                        <div className="alert alert-danger alert-sm text-center w-75" role="alert">
+                        <div className="alert alert-danger alert-sm text-center w-50" role="alert">
                             {errorMessageBottom}
                         </div>
                     </div>}
