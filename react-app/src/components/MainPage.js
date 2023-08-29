@@ -107,12 +107,12 @@ export default function MainPage() {
         <div className="page-content container">
             <div className="row">
                 <div className="col-8">
-                    <ControlButton onClick={onSkipBack} text={"Skip back"} />
-                    <ControlButton onClick={onStepBack} text={"Step back"} />
+                    <ControlButton onClick={onSkipBack} text={"Skip back"} blocked={!paused} />
+                    <ControlButton onClick={onStepBack} text={"Step back"} blocked={!paused} />
                     {paused && <ControlButton onClick={onPlay} text={"Play"} />}
                     {!paused && <ControlButton onClick={onPause} text={"Pause"} />}
-                    <ControlButton onClick={onStepForward} text={"Step forward"} />
-                    <ControlButton onClick={onSkipForward} text={"Skip forward"} />
+                    <ControlButton onClick={onStepForward} text={"Step forward"} blocked={!paused} />
+                    <ControlButton onClick={onSkipForward} text={"Skip forward"} blocked={!paused} />
                 </div>
 
                 <div className="col-4">
