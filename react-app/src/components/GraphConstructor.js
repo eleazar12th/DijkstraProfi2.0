@@ -92,12 +92,12 @@ export default function GraphConstructor(props) {
         physics: true
     };
 
-    return (<div className="row">
-        <div className="col-6 d-flex align-items-center">
+    return (<div className="row algorithm-row">
+        <div className="col-6">
             <Graph graph={graph} options={options} />
         </div>
 
-        <div className="col-6 d-flex align-items-center">
+        <div className="col-6">
             <div className="card w-100">
                 <div className="card-header">
                     Current algorithm step
