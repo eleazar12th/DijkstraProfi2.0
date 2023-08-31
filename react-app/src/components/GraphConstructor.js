@@ -79,7 +79,7 @@ export default function GraphConstructor(props) {
         layout: {
             hierarchical: false
         },
-        height: "500px",
+        height: "100%",
         interaction: {
             dragNodes: false,
             dragView: false,
@@ -93,7 +93,7 @@ export default function GraphConstructor(props) {
     };
 
     return (<div className="row">
-        <div className="col-6">
+        <div className="col-6 d-flex align-items-center">
             <Graph graph={graph} options={options} />
         </div>
 
@@ -103,7 +103,7 @@ export default function GraphConstructor(props) {
                     Current algorithm step
                 </div>
                 <div className="card-body">
-                    <p>{props.graphState.description}</p>
+                    {props.graphState.description}
                 </div>
             </div>
         </div>
