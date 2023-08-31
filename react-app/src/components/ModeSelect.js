@@ -1,5 +1,5 @@
 export default function ModeSelect(props) {
-    return (<div className="input-group input-group-sm mb-3 width-310">
+    return (<div className="input-group input-group-sm mb-3 width-320">
         <select className="form-select form-select-sm"
                 name="graph-type-select" id="graph-type-select"
                 onChange={props.handleOnChange}>

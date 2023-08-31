@@ -1,5 +1,5 @@
 export default function LevelSelect(props) {
-    return (<div className="input-group input-group-sm mb-3 width-310">
+    return (<div className="input-group input-group-sm mb-3 width-320">
         <span className="input-group-text" id="level-label">Level</span>
         <select name="level-select" id="level-select"
                 className="form-select form-select-sm"
