@@ -3,7 +3,7 @@ export default function TableCell(props) {
         props.setCellError(props.rowNumber, props.colNumber, msg);
     }
 
-    const cellTitle = `из ${props.rowNumber + 1} в ${props.colNumber + 1}`;
+    const cellTitle = `from ${props.rowNumber + 1} to ${props.colNumber + 1}`;
 
     function handleOnChange(evt) {
         let val = +evt.target.value;
@@ -13,13 +13,13 @@ export default function TableCell(props) {
             setError("");
             return;
         } else if (!evt.target.value.trim().length || !Number.isInteger(val)) {
-            setError(`Ошибка в ребре ${cellTitle}. Длина ребра должна быть целым числом.`);
+            setError(`Error in the edge ${cellTitle}. The edge length must be an integer.`);
             return;
         } else if (val < 0) {
-            setError(`Ошибка в ребре ${cellTitle}. Длина ребра не может быть меньше 0.`);
+            setError(`Error in the edge ${cellTitle}. The edge length cannot be less than 0.`);
             return;
         } else if (val > 1000) {
-            setError(`Ошибка в ребре ${cellTitle}. Длина ребра не может быть больше 1000.`);
+            setError(`Error in the edge ${cellTitle}. The edge length cannot be greater than 1000.`);
             return;
         }
 

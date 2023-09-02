@@ -16,7 +16,7 @@ export default function Dijkstra(graphData, start) {
 
     let states = [];
     let dist = Array(n + 1).fill(cst.INF);
-    let nodeColors = Array(n + 1).fill(cst.WHITE);
+    let nodeColors = Array(n + 1).fill(cst.GRAY);
     const edgesAmount = findEdgesAmount(n, edges);
     let edgeColors = Array(edgesAmount).fill(cst.BLACK);
 
@@ -50,7 +50,7 @@ export default function Dijkstra(graphData, start) {
 
     dist[start] = 0;
     heap.push([dist[start], start]);
-    nodeColors[start] = cst.VIOLET;
+    nodeColors[start] = cst.BLUE;
 
     pushState(cst.FIRST_STEP_TEXT);
 
@@ -69,7 +69,7 @@ export default function Dijkstra(graphData, start) {
 
         for (let e of edges[v]) {
             if (e.to !== v && nodeColors[e.to] !== cst.GREEN) {
-                nodeColors[e.to] = cst.VIOLET;
+                nodeColors[e.to] = cst.BLUE;
 
                 if (dist[v] + e.length < dist[e.to]) {
                     dist[e.to] = dist[v] + e.length;

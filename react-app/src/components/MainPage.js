@@ -89,10 +89,10 @@ export default function MainPage() {
 
         let val = evt.target.value;
         if (!val.trim().length || !Number.isInteger(+val)) {
-            setErrorMessage("Ошибка: номер вершины может быть только целым числом");
+            setErrorMessage("Error: the node number can only be an integer");
             return;
         } else if (val < 1 || val > graphData.nodesAmount) {
-            setErrorMessage("Ошибка: вершина с таким номером не найдена");
+            setErrorMessage("Error: not found node with such number");
             return;
         }
 

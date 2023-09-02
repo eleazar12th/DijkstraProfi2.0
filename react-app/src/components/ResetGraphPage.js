@@ -71,13 +71,10 @@ export default function ResetGraphPage() {
     function handleNodesAmountChange(evt) {
         let val = +evt.target.value;
         if (!Number.isInteger(val) || val < 1) {
-            setErrorMessageTop("Ошибка: введите натуральное число");
-            return;
-        } else if (val === 1) {
-            setErrorMessageTop("Ошибка: количество вершин не должно быть меньше 2");
+            setErrorMessageTop("Error: enter a natural number");
             return;
         } else if (val > 16) {
-            setErrorMessageTop("Ошибка: количество вершин не должно превышать 16");
+            setErrorMessageTop("Error: the number of nodes should not be greater than 16");
             return;
         }
 

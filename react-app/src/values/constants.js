@@ -1,23 +1,23 @@
 export const INF = 1000000;
 
-export const WHITE = "lightgray";
+export const GRAY = "lightgray";
 export const BLACK = "black";
 export const GREEN = "lightgreen";
 export const RED = "red";
-export const VIOLET = "lightblue";
+export const BLUE = "lightblue";
 
 export const FIRST_STEP_TEXT = (<div>
     <p>
         Пусть dist[v] - это длинна пути из начальной вершины start в вершину v.
         Если пути из start в v не сущетствует или мы его пока не знаем, dist[v] равен бесконечности.
         Тогда задача алгоритма - найти минимальное значение dist[v] для всех v.
-        На рисунке каждая вершина имеет вид v: dist[v].
+        На рисунке в каждой вершине v записано v: dist[v].
     </p>
 
     <p>
         Разделим вершины на три типа.
         <br />
-        <i>Обработанные (зелёные)</i> - те, до которых мы уже знаем наикратчайший путь.
+        <i>Обработанные (зелёные)</i> - те, до которых мы уже знаем кратчайший путь.
         <br />
         <i>Частично обработанные (голубые)</i> - те, до которых мы знаем некоторый
         (возможно неоптимальный) путь.
