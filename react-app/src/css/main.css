@@ -36,5 +36,9 @@ input[type=range] {
 }
 
 .algorithm-row {
-    margin-top: 10vh;
+    height: 70vh;
+}
+
+.algorithm-card {
+    justify-content: center;
 }

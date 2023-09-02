@@ -79,7 +79,7 @@ export default function GraphConstructor(props) {
         layout: {
             hierarchical: false
         },
-        height: "100%",
+        height: "95%",
         interaction: {
             dragNodes: false,
             dragView: false,
@@ -97,8 +97,8 @@ export default function GraphConstructor(props) {
             <Graph graph={graph} options={options} />
         </div>
 
-        <div className="col-6">
-            <div className="card w-100">
+        <div className="col-6 d-flex flex-column justify-content-center">
+            <div className="card w-100 algorithm-card">
                 <div className="card-header">
                     Current algorithm step
                 </div>
