@@ -1,18 +1,7 @@
-import { useState, useEffect } from "react";
 import TableRow from "./TableRow";
 import "../css/table.css";
 
 export default function Table(props) {
-    const [errorMatrix, setErrorMatrix] = useState(null);
-
-    useEffect(() => {
-        setErrorMatrix(
-            Array(props.nodesAmount).fill(
-                Array(props.nodesAmount).fill("")
-            )
-        );
-    }, [props.nodesAmount]);
-
     function deepCopy(arr) {
         let arrCopy = [];
         for (let i = 0; i < arr.length; ++i) {
@@ -46,24 +35,10 @@ export default function Table(props) {
         cell.value = "";
     }
 
-    function checkErrorMatrix(arr) {
-        for (let i = 0; i < props.nodesAmount; ++i) {
-            for (let j = 0; j < props.nodesAmount; ++j) {
-                if (arr[i][j] !== "") {
-                    props.setErrorMessageBottom(arr[i][j]);
-                    return;
-                }
-            }
-        }
-
-        props.setErrorMessageBottom("");
-    }
-
-    function setCellError(rowNumber, colNumber, val) {
-        let newErrorMatrix = deepCopy(errorMatrix);
-        newErrorMatrix[rowNumber][colNumber] = val;
-        setErrorMatrix(newErrorMatrix);
-        checkErrorMatrix(newErrorMatrix);
+    function setCellError(rowNumber, colNumber, msg) {
+        let newErrorMatrix = deepCopy(props.errorMatrix);
+        newErrorMatrix[rowNumber][colNumber] = msg;
+        props.setCheckErrorMatrix(newErrorMatrix);
     }
 
     return (<div>

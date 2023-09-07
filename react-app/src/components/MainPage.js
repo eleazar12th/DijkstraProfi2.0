@@ -6,7 +6,7 @@ import GraphConstructor from "./GraphConstructor";
 import Dijkstra from "../dijkstra";
 import SpeedRange from "./SpeedRange";
 import Menu from "./Menu";
-import * as defaultVal from "../values/default-values";
+import * as defaultVal from "../constants/default-graphs";
 
 export default function MainPage() {
     const [start, setStart] = useState(1);
@@ -89,10 +89,10 @@ export default function MainPage() {
 
         let val = evt.target.value;
         if (!val.trim().length || !Number.isInteger(+val)) {
-            setErrorMessage("Error: the node number can only be an integer");
+            setErrorMessage("Error: the node number should be an integer");
             return;
         } else if (val < 1 || val > graphData.nodesAmount) {
-            setErrorMessage("Error: not found node with such number");
+            setErrorMessage("Error: not found a node with such number");
             return;
         }
 
@@ -133,7 +133,7 @@ export default function MainPage() {
                 </div>
             </div>
 
-            <GraphConstructor graphData={graphData} graphState={graphStates[index]}/>
+            <GraphConstructor graphData={graphData} graphState={graphStates[index]} />
         </div>
     </div>);
 }

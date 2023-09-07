@@ -1,12 +1,4 @@
-export const INF = 1000000;
-
-export const GRAY = "lightgray";
-export const BLACK = "black";
-export const GREEN = "lightgreen";
-export const RED = "red";
-export const BLUE = "lightblue";
-
-export const FIRST_STEP_TEXT = (<div>
+const FIRST_STEP_RU_TEXT = (<div>
     <p>
         Пусть dist[v] - это длинна пути из начальной вершины start в вершину v.
         Если пути из start в v не сущетствует или мы его пока не знаем, dist[v] равен бесконечности.
@@ -22,7 +14,7 @@ export const FIRST_STEP_TEXT = (<div>
         <i>Частично обработанные (голубые)</i> - те, до которых мы знаем некоторый
         (возможно неоптимальный) путь.
         <br />
-        <i>Необработанные (серые)</i> - те, до кототрых мы не знаем ни одного пути.
+        <i>Необработанные (серые)</i> - те, до которых мы не знаем ни одного пути.
     </p>
 
     <p>
@@ -30,12 +22,12 @@ export const FIRST_STEP_TEXT = (<div>
     </p>
 </div>);
 
-export const TURN_EDGES_RED_TEXT = (<p>
+const TURN_EDGES_RED_RU_TEXT = (<p>
     Теперь рассматриваем все, ещё не обработанные
     (серые и голубые) вершины u, в которые можно попасть из v.
 </p>);
 
-export const UPDATE_DISTANCE_TEXT = (<div>
+const UPDATE_DISTANCE_RU_TEXT = (<div>
     <p>
         Для каждой u пытаемся улучшить значение dist[u].
         Пусть длина ребра из v в u равна len. Тогда наименьшее
@@ -46,19 +38,28 @@ export const UPDATE_DISTANCE_TEXT = (<div>
         про которые мы уже что-то знаем).
     </p>
 </div>);
-export const TURN_EDGES_BLACK_TEXT = (
+const TURN_EDGES_BLACK_RU_TEXT = (
     <p>
         Итерация алгоритма завершена. Возвращаемся к первому шагу.
     </p>
 );
 
-export const SELECT_GREEN_NODE_TEXT = (<p>
+const SELECT_GREEN_NODE_RU_TEXT = (<p>
     Из голубых (частично обработанных) вершин, выбираем вершину v
     с минимальным расстоянием от начальной и помечаем как обработанную
     (красим в зелёный цвет).
 </p>);
 
-export const LAST_STEP_TEXT = (<p>
+const LAST_STEP_RU_TEXT = (<p>
     Голубых вершин не осталось. Значит, работа алгоритма завершена.
     Мы нашли минимальное расстояние до каждой вершины.
 </p>);
+
+export const RU_HINTS = {
+    "FIRST_STEP": FIRST_STEP_RU_TEXT,
+    "TURN_EDGES_RED": TURN_EDGES_RED_RU_TEXT,
+    "UPDATE_DISTANCE": UPDATE_DISTANCE_RU_TEXT,
+    "TURN_EDGES_BLACK": TURN_EDGES_BLACK_RU_TEXT,
+    "SELECT_GREEN_NODE": SELECT_GREEN_NODE_RU_TEXT,
+    "LAST_STEP": LAST_STEP_RU_TEXT,
+}

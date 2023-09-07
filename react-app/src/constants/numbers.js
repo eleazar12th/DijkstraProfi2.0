@@ -1,0 +1,1 @@
+export const INF = 1000000;

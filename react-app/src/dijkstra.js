@@ -1,6 +1,7 @@
 import { Heap } from "heap-js";
 import State from "./structures/state";
-import * as cst from "./values/constants";
+import * as colors from "./constants/colors";
+import { INF } from "./constants/numbers";
 
 function findEdgesAmount(n, edges) {
     let edgesCount = 0;
@@ -15,10 +16,10 @@ export default function Dijkstra(graphData, start) {
     const edges = graphData.edges;
 
     let states = [];
-    let dist = Array(n + 1).fill(cst.INF);
-    let nodeColors = Array(n + 1).fill(cst.GRAY);
+    let dist = Array(n + 1).fill(INF);
+    let nodeColors = Array(n + 1).fill(colors.GRAY);
     const edgesAmount = findEdgesAmount(n, edges);
-    let edgeColors = Array(edgesAmount).fill(cst.BLACK);
+    let edgeColors = Array(edgesAmount).fill(colors.BLACK);
 
     let redFlag = false;
 
@@ -31,9 +32,9 @@ export default function Dijkstra(graphData, start) {
 
     function turnEdgesRed(v) {
         for (let e of edges[v]) {
-            if (e.to !== v && nodeColors[e.to] !== cst.GREEN) {
+            if (e.to !== v && nodeColors[e.to] !== colors.GREEN) {
                 redFlag = true;
-                edgeColors[e.id] = cst.RED;
+                edgeColors[e.id] = colors.RED;
             }
         }
     }
@@ -41,7 +42,7 @@ export default function Dijkstra(graphData, start) {
     function turnEdgesBlack(v) {
         redFlag = false;
         for (let e of edges[v]) {
-            edgeColors[e.id] = cst.BLACK;
+            edgeColors[e.id] = colors.BLACK;
         }
     }
 
@@ -50,26 +51,26 @@ export default function Dijkstra(graphData, start) {
 
     dist[start] = 0;
     heap.push([dist[start], start]);
-    nodeColors[start] = cst.BLUE;
+    nodeColors[start] = colors.BLUE;
 
-    pushState(cst.FIRST_STEP_TEXT);
+    pushState("FIRST_STEP");
 
     while (!heap.isEmpty()) {
         let v = heap.pop()[1];
-        if (nodeColors[v] === cst.GREEN) {
+        if (nodeColors[v] === colors.GREEN) {
             continue;
         }
 
-        nodeColors[v] = cst.GREEN;
-        pushState(cst.SELECT_GREEN_NODE_TEXT);
+        nodeColors[v] = colors.GREEN;
+        pushState("SELECT_GREEN_NODE");
 
         turnEdgesRed(v);
         if (redFlag)
-            pushState(cst.TURN_EDGES_RED_TEXT);
+            pushState("TURN_EDGES_RED");
 
         for (let e of edges[v]) {
-            if (e.to !== v && nodeColors[e.to] !== cst.GREEN) {
-                nodeColors[e.to] = cst.BLUE;
+            if (e.to !== v && nodeColors[e.to] !== colors.GREEN) {
+                nodeColors[e.to] = colors.BLUE;
 
                 if (dist[v] + e.length < dist[e.to]) {
                     dist[e.to] = dist[v] + e.length;
@@ -79,12 +80,12 @@ export default function Dijkstra(graphData, start) {
         }
 
         if (redFlag) {
-            pushState(cst.UPDATE_DISTANCE_TEXT);
+            pushState("UPDATE_DISTANCE");
             turnEdgesBlack(v);
-            pushState(cst.TURN_EDGES_BLACK_TEXT);
+            pushState("TURN_EDGES_BLACK");
         }
     }
 
-    pushState(cst.LAST_STEP_TEXT);
+    pushState("LAST_STEP");
     return states;
 }

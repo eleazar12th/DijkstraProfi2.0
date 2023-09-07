@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import Graph from "react-graph-vis";
-import { INF } from "../values/constants";
+import AlgorithmStep from "./AlgorithmStep";
+import { INF } from "../constants/numbers";
 
 function hideArrow(edge) {
     edge.arrows = {
@@ -92,20 +93,19 @@ export default function GraphConstructor(props) {
         physics: true
     };
 
+    if (props.bigGraph) {
+        return (<div className="big-graph-window">
+            <Graph graph={graph} options={options} />
+        </div>);
+    }
+
     return (<div className="row algorithm-row">
         <div className="col-6">
             <Graph graph={graph} options={options} />
         </div>
 
         <div className="col-6 d-flex flex-column justify-content-center">
-            <div className="card w-100 algorithm-card">
-                <div className="card-header">
-                    Current algorithm step
-                </div>
-                <div className="card-body">
-                    {props.graphState.description}
-                </div>
-            </div>
+            <AlgorithmStep hintKey={props.graphState.description} />
         </div>
     </div>);
 }

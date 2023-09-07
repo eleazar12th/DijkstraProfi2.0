@@ -7,7 +7,7 @@ import Table from "./Table";
 import LevelSelect from "./LevelSelect";
 import Menu from "./Menu";
 import GraphData from "../structures/graph-data";
-import * as defaultVal from "../values/default-values";
+import * as defaultVal from "../constants/default-graphs";
 
 export default function ResetGraphPage() {
     const locationState = useLocation().state;
@@ -16,6 +16,7 @@ export default function ResetGraphPage() {
     );
 
     const [matrix, setMatrix] = useState([]);
+    const [errorMatrix, setErrorMatrix] = useState([]);
     const [graphType, setGraphType] = useState(graphTypeInitValue);
 
     const [mode, setMode] = useState("new-graph");
@@ -68,6 +69,42 @@ export default function ResetGraphPage() {
         });
     }
 
+    function checkErrorMatrix(arr) {
+        for (let i = 0; i < arr.length; ++i) {
+            for (let j = 0; j < arr.length; ++j) {
+                if (arr[i][j] !== "") {
+                    setErrorMessageBottom(arr[i][j]);
+                    return;
+                }
+            }
+        }
+
+        setErrorMessageBottom("");
+    }
+
+    function setCheckErrorMatrix(newErrorMatrix) {
+        setErrorMatrix(newErrorMatrix);
+        checkErrorMatrix(newErrorMatrix);
+    }
+
+    function changeErrorMatrixSize(newSize) {
+        let newErrorMatrix = [];
+        for (let i = 0; i < newSize; ++i) {
+            newErrorMatrix.push(Array(newSize).fill(""))
+        }
+
+        const n = Math.min(newSize, errorMatrix.length);
+        for (let i = 0; i < n; ++i) {
+            for (let j = 0; j < n; ++j) {
+                if (errorMatrix[i][j] !== "") {
+                    newErrorMatrix[i][j] = errorMatrix[i][j];
+                }
+            }
+        }
+
+        setCheckErrorMatrix(newErrorMatrix);
+    }
+
     function handleNodesAmountChange(evt) {
         let val = +evt.target.value;
         if (!Number.isInteger(val) || val < 1) {
@@ -80,6 +117,7 @@ export default function ResetGraphPage() {
 
         setNodesAmount(val);
         changeMatrixSize(val);
+        changeErrorMatrixSize(val);
         setErrorMessageTop("");
     }
 
@@ -153,7 +191,8 @@ export default function ResetGraphPage() {
                             graphType={graphType}
                             matrix={matrix}
                             setMatrix={setMatrix}
-                            setErrorMessageBottom={setErrorMessageBottom}
+                            errorMatrix={errorMatrix}
+                            setCheckErrorMatrix={setCheckErrorMatrix}
                         />
                     }
 
