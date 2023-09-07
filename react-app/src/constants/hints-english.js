@@ -9,12 +9,12 @@ const FIRST_STEP_EN_TEXT = (<div>
     <p>
         Let's divide the vertices into three groups.
         <br />
-        <i>Processed (green)</i> are those to which the shortest path is already known.
+        <i>Processed (green)</i> - vertices to which the shortest path is already known.
         <br />
-        <i>Partially processed (blue)</i> are those to which we know some
+        <i>Partially processed (blue)</i> - vertices to which we know some
         (possibly not optimal) path.
         <br />
-        <i>Unprocessed (gray)</i> are those to which we don't know any path.
+        <i>Unprocessed (gray)</i> - vertices to which we don't know any path.
     </p>
 
     <p>
