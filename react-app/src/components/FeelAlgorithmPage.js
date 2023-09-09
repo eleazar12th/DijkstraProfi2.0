@@ -1,9 +1,9 @@
+import {useEffect, useMemo, useState} from "react";
 import Menu from "./Menu";
 import randomGraphDataStates from "../random-graph-generator";
-import {Navigate, useLocation} from "react-router-dom";
-import {useEffect, useMemo, useState} from "react";
 import ControlButton from "./ControlButton";
 import GraphConstructor from "./GraphConstructor";
+import SpeedRange from "./SpeedRange";
 import "../css/feel-algorithm.css";
 
 export default function FeelAlgorithmPage() {
@@ -12,27 +12,16 @@ export default function FeelAlgorithmPage() {
     const [paused, setPaused] = useState(true);
     const [speed, setSpeed] = useState(1);
 
-    const [graphData, setGraphData] = useState([]);
-    const [graphStates, setGraphStates] = useState(null);
-    const [maxIndex, setMaxIndex] = useState(0);
-
-    function setRandomGraph() {
-        let [newNodesAmount, newGraphData, newGraphStates] = randomGraphDataStates();
-        setGraphData(newGraphData);
-        setGraphStates(newGraphStates);
-        setMaxIndex(newNodesAmount - 1);
-    }
-
-    useEffect(() => {
-        setRandomGraph();
-    }, [])
+    const [graphData, graphStates] = useMemo(
+        () => randomGraphDataStates(),
+        []
+    )
+    const maxIndex = graphStates.length - 1;
 
     useEffect(() => {
         if (paused) {
             return;
         }
-
-        const maxIndex = graphStates.length - 1;
 
         const interval = setInterval(() => {
             setIndex(Math.min(index + 1, maxIndex));
@@ -42,7 +31,7 @@ export default function FeelAlgorithmPage() {
             }
         }, 1000 / speed);
         return () => clearInterval(interval);
-    }, [paused, graphStates, index, speed]);
+    }, [paused, graphStates, index, maxIndex, speed]);
 
     function onPause() {
         setPaused(true);
@@ -59,16 +48,21 @@ export default function FeelAlgorithmPage() {
     function onRestart() {
         setIndex(0);
         setPaused(true);
-        setRandomGraph();
     }
 
     return (<div>
         <Menu activeLinkName="feel" graphType={graphData.graphType} />
 
-        <div className="page-content container">
-            <ControlButton onClick={onRestart} text={"Restart"} />
-            {paused && <ControlButton onClick={onPlay} text={"Play"} />}
-            {!paused && <ControlButton onClick={onPause} text={"Pause"} />}
+        <div className="container">
+            <div className="row">
+                <div className="col-6">
+                    <div className="big-graph-buttons">
+                        <ControlButton onClick={onRestart} text={"Restart"} />
+                        {paused && <ControlButton onClick={onPlay} text={"Play"} />}
+                        {!paused && <ControlButton onClick={onPause} text={"Pause"} />}
+                    </div>
+                </div>
+            </div>
 
             <GraphConstructor graphData={graphData} graphState={graphStates ? graphStates[index] : null}
                               bigGraph={true} />

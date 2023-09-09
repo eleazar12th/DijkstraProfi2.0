@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import LanguageSelectSmall from "./LanguageSelectSmall";
 import {RU_HINTS} from "../constants/hints-russian";
 import {EN_HINTS} from "../constants/hints-english";
@@ -6,8 +6,19 @@ import {EN_HINTS} from "../constants/hints-english";
 export default function AlgorithmStep(props) {
     const [lang, setLang] = useState("ru");
 
+    useEffect(() => {
+        let sessionLang = sessionStorage.getItem("lang");
+
+        if (sessionLang) {
+            setLang(sessionLang);
+        } else {
+            sessionStorage.setItem("lang", "ru");
+        }
+    }, [])
+
     function handleLangChange(evt) {
         setLang(evt.target.value);
+        sessionStorage.setItem("lang", evt.target.value);
     }
 
     return (
@@ -20,7 +31,7 @@ export default function AlgorithmStep(props) {
 
                     <div className="col-4">
                         <LanguageSelectSmall handleOnChange={handleLangChange}
-                                             defaultLang={"ru"} />
+                                             defaultLang={sessionStorage.getItem("lang") || "ru"} />
                     </div>
                 </div>
             </div>

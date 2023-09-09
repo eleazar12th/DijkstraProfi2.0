@@ -16,6 +16,7 @@ export default function MainPage() {
     const [errorMessage, setErrorMessage] = useState("");
 
     const locationState = useLocation().state;
+
     const graphData = useMemo(
         () => {
             if (locationState) {

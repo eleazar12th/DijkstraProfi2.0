@@ -9,7 +9,7 @@ import Menu from "./Menu";
 import GraphData from "../structures/graph-data";
 import * as defaultVal from "../constants/default-graphs";
 
-export default function ResetGraphPage() {
+export default function AnotherGraphPage() {
     const locationState = useLocation().state;
     const [graphTypeInitValue, setGraphTypeInitValue] = useState(
         locationState && locationState.graphType ? locationState.graphType : "undirected"

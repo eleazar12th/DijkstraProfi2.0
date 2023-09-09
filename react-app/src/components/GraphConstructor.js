@@ -20,7 +20,7 @@ function enableSmooth(edge) {
 }
 
 export default function GraphConstructor(props) {
-    function createGraphNodesEdges(graphData, graphState) {
+    function createGraphNodesEdges(graphData, graphState, isBigGraph) {
         const graphType = graphData.graphType;
         const nodesNumber = graphData.nodesAmount;
         const edgesMap = graphData.edges;
@@ -34,7 +34,7 @@ export default function GraphConstructor(props) {
 
             let newNode = {
                 id: v,
-                label: v + ": " + nodeDist,
+                label: isBigGraph ? "  " + nodeDist + "  " : v + ": " + nodeDist,
                 title: "node " + v,
                 color: graphState.nodeColors[v]
             };
@@ -72,8 +72,8 @@ export default function GraphConstructor(props) {
     }
 
     const graph = useMemo(
-        () => createGraphNodesEdges(props.graphData, props.graphState),
-        [props.graphData, props.graphState]
+        () => createGraphNodesEdges(props.graphData, props.graphState, props.bigGraph),
+        [props.graphData, props.graphState, props.bigGraph]
     );
 
     const options = {
@@ -94,6 +94,9 @@ export default function GraphConstructor(props) {
     };
 
     if (props.bigGraph) {
+        options.height = "100%";
+        options.width = "100%";
+
         return (<div className="big-graph-window">
             <Graph graph={graph} options={options} />
         </div>);

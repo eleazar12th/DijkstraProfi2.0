@@ -2,7 +2,7 @@ import GraphData from "./structures/graph-data";
 import Dijkstra from "./dijkstra";
 
 function randomEdge() {
-   return Math.floor(Math.random() * 200);
+   return Math.floor(Math.random() * 10);
 }
 
 function randomMatrixGenerator(nodesAmount) {
@@ -29,11 +29,11 @@ function randomStart(nodesAmount) {
 }
 
 export default function randomGraphDataStates() {
-    let nodesAmount = 15;
+    let nodesAmount = 15 + Math.floor(Math.random() * 10);
     let matrix = randomMatrixGenerator(nodesAmount);
     let graphData = new GraphData(matrix, "undirected");
 
     let start = randomStart(nodesAmount);
     let graphStates = Dijkstra(graphData, start);
-    return [nodesAmount, graphData, graphStates];
+    return [graphData, graphStates];
 }
