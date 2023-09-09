@@ -3,19 +3,18 @@ import Menu from "./Menu";
 import randomGraphDataStates from "../random-graph-generator";
 import ControlButton from "./ControlButton";
 import GraphConstructor from "./GraphConstructor";
-import SpeedRange from "./SpeedRange";
 import "../css/feel-algorithm.css";
 
 export default function FeelAlgorithmPage() {
     const [index, setIndex] = useState(0);
-
     const [paused, setPaused] = useState(true);
-    const [speed, setSpeed] = useState(1);
 
     const [graphData, graphStates] = useMemo(
         () => randomGraphDataStates(),
         []
     )
+
+    const speed = 2;
     const maxIndex = graphStates.length - 1;
 
     useEffect(() => {
@@ -53,19 +52,13 @@ export default function FeelAlgorithmPage() {
     return (<div>
         <Menu activeLinkName="feel" graphType={graphData.graphType} />
 
-        <div className="container">
-            <div className="row">
-                <div className="col-6">
-                    <div className="big-graph-buttons">
-                        <ControlButton onClick={onRestart} text={"Restart"} />
-                        {paused && <ControlButton onClick={onPlay} text={"Play"} />}
-                        {!paused && <ControlButton onClick={onPause} text={"Pause"} />}
-                    </div>
-                </div>
-            </div>
-
-            <GraphConstructor graphData={graphData} graphState={graphStates ? graphStates[index] : null}
-                              bigGraph={true} />
+        <div className="container feel-buttons">
+            <ControlButton onClick={onRestart} text={"Restart"} />
+            {paused && <ControlButton onClick={onPlay} text={"Play"} />}
+            {!paused && <ControlButton onClick={onPause} text={"Pause"} />}
         </div>
+
+        <GraphConstructor graphData={graphData} graphState={graphStates ? graphStates[index] : null}
+                          bigGraph={true} />
     </div>);
 }

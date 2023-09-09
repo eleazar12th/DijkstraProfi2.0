@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import Graph from "react-graph-vis";
 import AlgorithmStep from "./AlgorithmStep";
 import { INF } from "../constants/numbers";
+import {BLACK} from "../constants/colors";
 
 function hideArrow(edge) {
     edge.arrows = {
@@ -44,12 +45,16 @@ export default function GraphConstructor(props) {
         let edges = [];
         for (let v = 1; v <= nodesNumber; ++v) {
             for (let edge of edgesMap[v]) {
+                let newEdgeColor = graphState.edgeColors[edge.id];
                 let newEdge = {
                     from: v,
                     to: edge.to,
                     label: edge.length.toString(),
-                    color: graphState.edgeColors[edge.id]
+                    color: newEdgeColor,
                 };
+
+                if (newEdgeColor !== BLACK)
+                    newEdge.width = 1;
 
                 if (graphType === "undirected") {
                     if (newEdge.to < v)
