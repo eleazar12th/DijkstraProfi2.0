@@ -49,6 +49,10 @@ export default function FeelAlgorithmPage() {
         setPaused(true);
     }
 
+    function onRebuild() {
+        window.location.reload();
+    }
+
     return (<div>
         <Menu activeLinkName="feel" graphType={graphData.graphType} />
 
@@ -56,6 +60,7 @@ export default function FeelAlgorithmPage() {
             <ControlButton onClick={onRestart} text={"Restart"} />
             {paused && <ControlButton onClick={onPlay} text={"Play"} />}
             {!paused && <ControlButton onClick={onPause} text={"Pause"} />}
+            <ControlButton onClick={onRebuild} text={"Rebuild"} />
         </div>
 
         <GraphConstructor graphData={graphData} graphState={graphStates ? graphStates[index] : null}

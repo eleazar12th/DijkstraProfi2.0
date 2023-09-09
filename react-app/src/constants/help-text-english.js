@@ -48,8 +48,9 @@ export const EN_TEXT = (<div className="help-txt">
         On the <i>Feel algorithm</i> page, you can observe
         how Dijkstra's algorithm works on a randomly generated graph.
         Here the vertices do not have their number on them, only their distance.
-        Note that when you click on the <i>Restart</i> button or reload the page,
-        the graph will be replaced by a new one.
+        Note that the <i>Restart</i> button reverts the graph to its initial state
+        (the graph itself remains the same),
+        while <i>Rebuild</i> or reloading the page will generate a new graph.
     </p>
 
     <p>
