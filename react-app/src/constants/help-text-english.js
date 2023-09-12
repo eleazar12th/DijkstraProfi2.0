@@ -4,7 +4,7 @@ export const EN_TEXT = (<div className="help-txt">
         The site is intended for use on computers, tablets and electronic whiteboards,
         no mobile interface is provided.
         You can read more about the algorithm itself, for example, <a
-        href="https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%94%D0%B5%D0%B9%D0%BA%D1%81%D1%82%D1%80%D1%8B"
+        href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm"
         target="_blank" rel="noopener noreferrer">
         here
     </a>.
